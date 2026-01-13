@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="DirectXTex/DirectXTex/DirectXTex_Desktop_2022_Win10.vcxproj" />
   <Project Path="DirectXTexWrap_DLL/DirectXTexWrap_DLL.vcxproj" />
 </Solution>
