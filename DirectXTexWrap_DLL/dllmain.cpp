@@ -10,12 +10,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		{
-			HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-			if (FAILED(hr))
-				return FALSE;
-		}
-		break;
 	case DLL_THREAD_ATTACH:
 	case DLL_THREAD_DETACH:
 	case DLL_PROCESS_DETACH:
@@ -43,4 +37,18 @@ HRESULT LoadFromDDSMemory(
 	DirectX::ScratchImage& image) noexcept
 {
 	return DirectX::LoadFromDDSMemoryEx(pSource, size, flags, metadata, nullptr, image);
+}
+
+extern "C" __declspec(dllexport) _Use_decl_annotations_
+HRESULT Decompress(
+	const DirectX::Image& cImage,
+	DXGI_FORMAT format,
+	DirectX::ScratchImage& image) noexcept
+{
+	return DirectX::Decompress(cImage, format, image);
+}
+
+extern "C" __declspec(dllexport) void ScratchImage_Release(DirectX::ScratchImage& image) noexcept
+{
+	image.Release();
 }
